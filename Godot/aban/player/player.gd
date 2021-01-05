@@ -1,8 +1,10 @@
+class_name Player
 extends RigidBody
 
 
 func _ready() -> void:
 	add_to_group("Players")
+	mode = RigidBody.MODE_CHARACTER
 
 
 func _physics_process(delta : float) -> void:
