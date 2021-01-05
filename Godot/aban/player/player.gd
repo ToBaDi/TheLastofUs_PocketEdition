@@ -17,4 +17,6 @@ func get_move_direction() -> Vector3:
 	dir.x += Input.get_action_strength("WalkLeft")
 	dir.z -= Input.get_action_strength("WalkBack")
 	dir.x -= Input.get_action_strength("WalkRight")
+	if dir.length_squared() > 1:
+		dir = dir.normalized()
 	return dir
