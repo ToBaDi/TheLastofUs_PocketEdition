@@ -1,3 +1,444 @@
-[gd_scene format=2]
+[gd_scene load_steps=48 format=2]
 
-[node name="Spatial" type="Spatial"]
+[ext_resource path="res://Dev/Ellie_Teeth_D.png" type="Texture" id=1]
+[ext_resource path="res://Dev/Ellie_Teeth_N.png" type="Texture" id=2]
+[ext_resource path="res://Dev/thicc hair.tres" type="Material" id=3]
+[ext_resource path="res://Dev/shirt.tres" type="Material" id=4]
+[ext_resource path="res://Dev/thin hair.tres" type="Material" id=5]
+[ext_resource path="res://Dev/face.tres" type="Material" id=6]
+[ext_resource path="res://Dev/hands.tres" type="Material" id=7]
+[ext_resource path="res://Dev/shoes.tres" type="Material" id=8]
+[ext_resource path="res://Dev/ellie.escn" type="PackedScene" id=9]
+[ext_resource path="res://Dev/Ellie_Eyelash_S.png" type="Texture" id=10]
+[ext_resource path="res://Dev/Ellie_Eyelash_D-cut.png" type="Texture" id=11]
+[ext_resource path="res://Dev/Ellie_Eye_S.png" type="Texture" id=12]
+[ext_resource path="res://Dev/Ellie_Brow_D-cut.png" type="Texture" id=13]
+[ext_resource path="res://Dev/Ellie_Pants_N.png" type="Texture" id=14]
+[ext_resource path="res://Dev/Ellie_Pants_D.png" type="Texture" id=15]
+[ext_resource path="res://Dev/Ellie_Pants_M(Dirt).png" type="Texture" id=16]
+[ext_resource path="res://Dev/Ellie_Eye_D-re.png" type="Texture" id=17]
+[ext_resource path="res://Dev/Ellie_Pants_S.png" type="Texture" id=18]
+[ext_resource path="res://Dev/Ellie_Eye_N-re.png" type="Texture" id=19]
+[ext_resource path="res://Dev/Ellie_Eyelash_N.png" type="Texture" id=20]
+
+[sub_resource type="VisualShaderNodeColorFunc" id=1]
+
+[sub_resource type="VisualShader" id=2]
+code = "shader_type spatial;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// ColorFunc:2
+	vec3 n_in2p0 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_out2p0;
+	{
+		vec3 c = n_in2p0;
+		float max1 = max(c.r, c.g);
+		float max2 = max(max1, c.b);
+		float max3 = max(max1, max2);
+		n_out2p0 = vec3(max3, max3, max3);
+	}
+
+// Output:0
+	ALBEDO = n_out2p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -126.059, 71.52 )
+nodes/fragment/2/node = SubResource( 1 )
+nodes/fragment/2/position = Vector2( 60, 180 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+
+[sub_resource type="VisualShaderNodeTexture" id=4]
+texture = ExtResource( 1 )
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id=5]
+texture = ExtResource( 2 )
+texture_type = 2
+
+[sub_resource type="VisualShader" id=6]
+code = "shader_type spatial;
+uniform sampler2D tex_frg_2 : hint_albedo;
+uniform sampler2D tex_frg_3 : hint_normal;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Texture:3
+	vec4 tex_frg_3_read = texture(tex_frg_3, UV.xy);
+	vec3 n_out3p0 = tex_frg_3_read.rgb;
+	float n_out3p1 = tex_frg_3_read.a;
+
+// Output:0
+	ALBEDO = n_out2p0;
+	NORMALMAP = n_out3p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -126.059, 221.52 )
+nodes/fragment/2/node = SubResource( 4 )
+nodes/fragment/2/position = Vector2( 120, 140 )
+nodes/fragment/3/node = SubResource( 5 )
+nodes/fragment/3/position = Vector2( 120, 440 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0, 3, 0, 0, 8 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+
+[sub_resource type="VisualShaderNodeTexture" id=8]
+texture = ExtResource( 15 )
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id=9]
+texture = ExtResource( 16 )
+
+[sub_resource type="VisualShaderNodeTexture" id=10]
+texture = ExtResource( 14 )
+texture_type = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=11]
+texture = ExtResource( 18 )
+
+[sub_resource type="VisualShader" id=12]
+code = "shader_type spatial;
+uniform sampler2D tex_frg_2 : hint_albedo;
+uniform sampler2D tex_frg_3;
+uniform sampler2D tex_frg_5;
+uniform sampler2D tex_frg_4 : hint_normal;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Texture:3
+	vec4 tex_frg_3_read = texture(tex_frg_3, UV.xy);
+	vec3 n_out3p0 = tex_frg_3_read.rgb;
+	float n_out3p1 = tex_frg_3_read.a;
+
+// Texture:5
+	vec4 tex_frg_5_read = texture(tex_frg_5, UV.xy);
+	vec3 n_out5p0 = tex_frg_5_read.rgb;
+	float n_out5p1 = tex_frg_5_read.a;
+
+// Texture:4
+	vec4 tex_frg_4_read = texture(tex_frg_4, UV.xy);
+	vec3 n_out4p0 = tex_frg_4_read.rgb;
+	float n_out4p1 = tex_frg_4_read.a;
+
+// Output:0
+	ALBEDO = n_out2p0;
+	METALLIC = dot(n_out3p0, vec3(0.333333, 0.333333, 0.333333));
+	SPECULAR = dot(n_out5p0, vec3(0.333333, 0.333333, 0.333333));
+	NORMALMAP = n_out4p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -126.059, 146.52 )
+nodes/fragment/2/node = SubResource( 8 )
+nodes/fragment/2/position = Vector2( 120, 80 )
+nodes/fragment/3/node = SubResource( 9 )
+nodes/fragment/3/position = Vector2( -0.0589066, 312.52 )
+nodes/fragment/4/node = SubResource( 10 )
+nodes/fragment/4/position = Vector2( 40, 600 )
+nodes/fragment/5/node = SubResource( 11 )
+nodes/fragment/5/position = Vector2( -140, 80 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0, 3, 0, 0, 2, 4, 0, 0, 8, 5, 0, 0, 4 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 12 )
+
+[sub_resource type="VisualShaderNodeTexture" id=14]
+texture = ExtResource( 17 )
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id=15]
+texture = ExtResource( 19 )
+texture_type = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=16]
+texture = ExtResource( 12 )
+
+[sub_resource type="VisualShader" id=17]
+code = "shader_type spatial;
+uniform sampler2D tex_frg_2 : hint_albedo;
+uniform sampler2D tex_frg_4;
+uniform sampler2D tex_frg_3 : hint_normal;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Texture:4
+	vec4 tex_frg_4_read = texture(tex_frg_4, UV.xy);
+	vec3 n_out4p0 = tex_frg_4_read.rgb;
+	float n_out4p1 = tex_frg_4_read.a;
+
+// Texture:3
+	vec4 tex_frg_3_read = texture(tex_frg_3, UV.xy);
+	vec3 n_out3p0 = tex_frg_3_read.rgb;
+	float n_out3p1 = tex_frg_3_read.a;
+
+// Output:0
+	ALBEDO = n_out2p0;
+	SPECULAR = dot(n_out4p0, vec3(0.333333, 0.333333, 0.333333));
+	NORMALMAP = n_out3p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -235.325, -3.47998 )
+nodes/fragment/2/node = SubResource( 14 )
+nodes/fragment/2/position = Vector2( 128.675, 79.52 )
+nodes/fragment/3/node = SubResource( 15 )
+nodes/fragment/3/position = Vector2( 140, 560 )
+nodes/fragment/4/node = SubResource( 16 )
+nodes/fragment/4/position = Vector2( 140, 320 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 0, 8, 4, 0, 0, 4, 2, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = SubResource( 17 )
+
+[sub_resource type="VisualShaderNodeTexture" id=19]
+texture = ExtResource( 11 )
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id=20]
+texture = ExtResource( 10 )
+
+[sub_resource type="VisualShaderNodeTexture" id=21]
+texture = ExtResource( 20 )
+texture_type = 2
+
+[sub_resource type="VisualShader" id=22]
+code = "shader_type spatial;
+uniform sampler2D tex_frg_2 : hint_albedo;
+uniform sampler2D tex_frg_3;
+uniform sampler2D tex_frg_4 : hint_normal;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Texture:3
+	vec4 tex_frg_3_read = texture(tex_frg_3, UV.xy);
+	vec3 n_out3p0 = tex_frg_3_read.rgb;
+	float n_out3p1 = tex_frg_3_read.a;
+
+// Texture:4
+	vec4 tex_frg_4_read = texture(tex_frg_4, UV.xy);
+	vec3 n_out4p0 = tex_frg_4_read.rgb;
+	float n_out4p1 = tex_frg_4_read.a;
+
+// Output:0
+	ALBEDO = n_out2p0;
+	ALPHA = n_out2p1;
+	SPECULAR = dot(n_out3p0, vec3(0.333333, 0.333333, 0.333333));
+	NORMALMAP = n_out4p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -235.325, 296.52 )
+nodes/fragment/2/node = SubResource( 19 )
+nodes/fragment/2/position = Vector2( 100, 40 )
+nodes/fragment/3/node = SubResource( 20 )
+nodes/fragment/3/position = Vector2( 100, 280 )
+nodes/fragment/4/node = SubResource( 21 )
+nodes/fragment/4/position = Vector2( 100, 520 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0, 2, 1, 0, 1, 3, 0, 0, 4, 4, 0, 0, 8 )
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 22 )
+
+[sub_resource type="VisualShaderNodeTexture" id=24]
+texture = ExtResource( 13 )
+texture_type = 1
+
+[sub_resource type="VisualShader" id=25]
+code = "shader_type spatial;
+uniform sampler2D tex_frg_2 : hint_albedo;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Output:0
+	ALBEDO = n_out2p0;
+	ALPHA = n_out2p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -351.476, -3.47998 )
+nodes/fragment/2/node = SubResource( 24 )
+nodes/fragment/2/position = Vector2( 100, 60 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0, 2, 1, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = SubResource( 25 )
+
+[sub_resource type="Environment" id=27]
+background_mode = 1
+background_color = Color( 0.26, 0.26, 0.26, 1 )
+
+[node name="ellie" instance=ExtResource( 9 )]
+
+[node name="submesh_0" parent="Ellie" index="0"]
+material/0 = ExtResource( 4 )
+
+[node name="submesh_0003" parent="Ellie" index="1"]
+transform = Transform( 99.9995, -0.312282, 0.0874983, -0.087028, 0.151245, 99.9998, -0.312414, -99.9994, 0.150973, 0, 1.88738e-15, 1.14076e-25 )
+material/0 = ExtResource( 5 )
+
+[node name="submesh_0004" parent="Ellie" index="2"]
+material/0 = SubResource( 3 )
+
+[node name="submesh_0006" parent="Ellie" index="3"]
+material/0 = ExtResource( 5 )
+
+[node name="submesh_1" parent="Ellie" index="4"]
+material/0 = ExtResource( 4 )
+
+[node name="submesh_1004" parent="Ellie" index="6"]
+material/0 = ExtResource( 3 )
+
+[node name="submesh_1005" parent="Ellie" index="7"]
+material/0 = ExtResource( 3 )
+
+[node name="submesh_10" parent="Ellie" index="8"]
+material/0 = SubResource( 7 )
+
+[node name="submesh_2" parent="Ellie" index="9"]
+material/0 = SubResource( 13 )
+
+[node name="submesh_2002" parent="Ellie" index="10"]
+material/0 = ExtResource( 5 )
+
+[node name="submesh_2004" parent="Ellie" index="12"]
+transform = Transform( 100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 0, 1.88738e-15, 2.52435e-29 )
+
+[node name="submesh_3" parent="Ellie" index="13"]
+material/0 = ExtResource( 8 )
+
+[node name="submesh_3004" parent="Ellie" index="16"]
+material/0 = ExtResource( 3 )
+
+[node name="submesh_4" parent="Ellie" index="17"]
+material/0 = ExtResource( 8 )
+
+[node name="submesh_4001" parent="Ellie" index="18"]
+material/0 = ExtResource( 3 )
+
+[node name="submesh_4002" parent="Ellie" index="19"]
+material/0 = ExtResource( 6 )
+
+[node name="submesh_5" parent="Ellie" index="20"]
+material/0 = ExtResource( 7 )
+
+[node name="submesh_5001" parent="Ellie" index="21"]
+material/0 = ExtResource( 3 )
+
+[node name="submesh_5002" parent="Ellie" index="22"]
+material/0 = ExtResource( 6 )
+
+[node name="submesh_6" parent="Ellie" index="23"]
+material/0 = ExtResource( 7 )
+
+[node name="submesh_6001" parent="Ellie" index="24"]
+material/0 = SubResource( 18 )
+
+[node name="submesh_7001" parent="Ellie" index="25"]
+material/0 = SubResource( 23 )
+
+[node name="submesh_8001" parent="Ellie" index="26"]
+material/0 = SubResource( 26 )
+
+[node name="Sun" parent="." index="1"]
+transform = Transform( 0.709685, -0.126144, -0.693134, 0.444847, 0.843144, 0.302026, 0.546313, -0.522682, 0.654481, -1.02335, 0, 0 )
+
+[node name="Camera" parent="." index="2"]
+transform = Transform( 0.920781, -0.0547007, 0.386226, 1.02001e-06, 0.990119, 0.140227, -0.39008, -0.129118, 0.911683, 0.578404, 1.59431, 1.4081 )
+environment = SubResource( 27 )
